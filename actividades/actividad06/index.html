@@ -540,6 +540,39 @@ footer p {
     background-color: transparent;
     border-radius: 3px;
 }
+/* ==================== ESTILO DEL BOTÓN DE REGRESAR (JS) ==================== */
+/* Asegúrate de que la fuente VT323 esté importada en tu CSS principal */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.boton-volver {
+    display: inline-block;        /* Para que respete los márgenes */
+    padding: 12px 25px;           /* Espacio interno ajustado */
+    
+    /* ESTILO ACT 14: Fuente pixelada */
+    font-family: 'VT323', monospace; 
+    font-size: 22px;              /* Tamaño más grande para la fuente pixel */
+    font-weight: normal;
+    text-decoration: none;        /* Quitar el subrayado */
+    
+    /* TEMA AZUL PASTEL / PIXEL ART */
+    background-color: #34495e;    /* Fondo Azul Oscuro (Primary) */
+    color: white;                 /* Letra blanca */
+    border: none;                 /* Sin borde (o puedes usar 1px solid #2c3e50) */
+    border-radius: 20px;          /* Bordes muy redondeados */
+    
+    cursor: pointer;
+    transition: all 0.3s ease;    /* Efecto suave general */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra suave */
+    
+    /* Márgenes */
+    margin-bottom: 20px; 
+}
+
+.boton-volver:hover {
+    background-color: #5dade2;    /* Azul Claro (Accent) al pasar el mouse */
+    transform: translateY(-3px);  /* Pequeño efecto de "flotar" al hacer hover */
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
 </style>
 </head>
 <body>
@@ -731,5 +764,6 @@ footer p {
 
 <script src="../../js/script_global.js"></script>
 </body>
+
 
 </html>

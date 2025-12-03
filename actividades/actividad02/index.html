@@ -6,474 +6,500 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizador de la Recta Numérica - Fundamentos de Álgebra</title>
     <style>
-        /* ==================== RESET BÁSICO Y TIPOGRAFÍA ==================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Verdana, Arial, sans-serif;
-            line-height: 2.2;
-            background-color: #f5f0ff;
-            color: #2f184b;
-            padding: 10px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            border: 7px solid #7a4ea0;
-            background-color: #ffffff;
-            padding: 20px;
-        }
-
-        /* ==================== ENCABEZADOS ==================== */
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .header img {
-            max-width: 220px;
-            height: auto;
-            display: block;
-            margin: 0 auto 10px auto;
-        }
-
-        h1 {
-            font-size: 34px;
-            margin-bottom: 10px;
-            color: #6a3d9a;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #5a2d85;
-        }
-
-        h3 {
-            font-size: 26px;
-            margin-bottom: 10px;
-            color: #5a2d85;
-        }
-
-        p {
-            font-size: 20px;
-            margin: 5px 0;
-            text-align: center;
-        }
-
-        /* ==================== CONTROLES Y FORMULARIOS ==================== */
-        .controls {
-            border: 5px solid #a98bc9;
-            padding: 20px;
-            margin-bottom: 20px;
-            background: #f8f3ff;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #2f184b;
-        }
-
-        .input-group input {
-            width: 300px;
-            padding: 8px;
-            border: 2px solid #a98bc9;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: #6a3d9a;
-        }
-
-        /* ==================== BOTONES ==================== */
-        button {
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            border: 2px solid #a98bc9;
-            background-color: #b58cd8;
-            color: white;
-            cursor: pointer;
-            margin-right: 10px;
-            margin-bottom: 5px;
-        }
-
-        button:hover {
-            background-color: #6a3d9a;
-        }
-
-        /* ==================== NÚMEROS PREDEFINIDOS ==================== */
-        .preset-section {
-            margin-top: 20px;
-        }
-
-        .preset-section h3 {
-            font-size: 26px;
-            margin-bottom: 10px;
-            color: #2f184b;
-        }
-
-        .preset-section p {
-            margin-bottom: 15px;
-            color: #2f184b;
-            font-size: 20px;
-            text-align: left;
-        }
-
-        .preset-numbers {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 15px;
-        }
-
-        .preset-btn {
-            padding: 5px 10px;
-            border: 2px solid #7a4ea0;
-            background-color: #f5f0ff;
-            cursor: pointer;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .preset-btn:hover {
-            background-color: #6a3d9a;
-            color: white;
-        }
-
-        /* ==================== RECTA NUMÉRICA ==================== */
-        .number-line-container {
-            border: 2px solid #7a4ea0;
-            padding: 20px;
-            margin-bottom: 20px;
-            background: #faf7ff;
-        }
-
-        .number-line-container h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            text-align: center;
-            color: #2f184b;
-        }
-
-        .number-line {
-            width: 100%;
-            height: 100px;
-            position: relative;
-            background-color: white;
-            border: 1px solid #7a4ea0;
-            margin: 20px 0;
-        }
-
-        .range-info {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .range-info small {
-            color: #2f184b;
-            font-size: 18px;
-        }
-
-        /* ==================== ELEMENTOS DE LA RECTA ==================== */
-        .line {
-            position: absolute;
-            top: 48px;
-            left: 5%;
-            right: 5%;
-            height: 4px;
-            background-color: #2f184b;
-        }
-
-        .tick {
-            position: absolute;
-            width: 2px;
-            height: 20px;
-            background-color: #2f184b;
-            top: 38px;
-        }
-
-        .tick-label {
-            position: absolute;
-            top: 65px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #2f184b;
-            transform: translateX(-50%);
-        }
-
-        /* ==================== PUNTOS EN LA RECTA ==================== */
-        .number-point {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            top: 40px;
-            transform: translateX(-50%);
-            border: 2px solid #2f184b;
-            cursor: pointer;
-        }
-
-        .number-point.naturals {
-            background-color: #ff6b6b;
-        }
-
-        .number-point.integers {
-            background-color: #4d94ff;
-        }
-
-        .number-point.rationals {
-            background-color: #4dff88;
-        }
-
-        .number-point.irrationals {
-            background-color: #ffd93b;
-        }
-
-        .point-label {
-            position: absolute;
-            top: -25px;
-            transform: translateX(-50%);
-            background-color: #fff;
-            border: 1px solid #7a4ea0;
-            padding: 2px 4px;
-            font-size: 14px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        /* =================== PANELES DE INFORMACIÓN =================== */
-        .info-panels {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .classification-panel,
-        .points-panel,
-        .distance-calculator {
-            border: 2px solid #7a4ea0;
-            padding: 15px;
-            background: #fff;
-        }
-
-        .classification-panel h3,
-        .points-panel h3,
-        .distance-calculator h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #2f184b;
-            border-bottom: 2px solid #7a4ea0;
-            padding-bottom: 5px;
-        }
-
-        /* ================== LEYENDA DE CLASIFICACIÓN ================== */
-        .classification-legend {
-            margin-bottom: 20px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-            padding: 5px;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #7a4ea0;
-        }
-
-        .legend-color.naturals {
-            background-color: #ff6b6b;
-        }
-
-        .legend-color.integers {
-            background-color: #4d94ff;
-        }
-
-        .legend-color.rationals {
-            background-color: #4dff88;
-        }
-
-        .legend-color.irrationals {
-            background-color: #ffd93b;
-        }
-
-        .classification-info h4 {
-            font-size: 20px;
-            margin: 15px 0 10px 0;
-            color: #2f184b;
-        }
-
-        .classification-info ul {
-            margin-left: 20px;
-        }
-
-        .classification-info li {
-            margin: 5px 0;
-            font-size: 18px;
-        }
-
-        /* ==================== LISTA DE PUNTOS ==================== */
-        .points-list {
-            min-height: 200px;
-        }
-
-        .empty-state p {
-            font-size: 16px;
-            color: #2f184b;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .empty-state small {
-            display: block;
-            text-align: center;
-            font-size: 18px;
-            color: #2f184b;
-        }
-
-        .point-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #7a4ea0;
-        }
-
-        /* ================== CALCULADORA DE DISTANCIAS ================== */
-        .calculator-description {
-            margin-bottom: 15px;
-            font-size: 18px;
-            color: #2f184b;
-            text-align: left;
-        }
-
-        .distance-inputs {
-            margin-bottom: 20px;
-        }
-
-        .distance-field {
-            margin-bottom: 15px;
-        }
-
-        .distance-field label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #2f184b;
-        }
-
-        .custom-select {
-            position: relative;
-            width: 100%;
-        }
-
-        .select-selected {
-            padding: 8px 30px 8px 10px;
-            border: 2px solid #7a4ea0;
-            background-color: #fff;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .select-selected:after {
-            content: "▼";
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 16px;
-        }
-
-        .select-items {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: #fff;
-            border: 2px solid #7a4ea0;
-            border-top: none;
-            z-index: 1000;
-            max-height: 150px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .select-items.show {
-            display: block;
-        }
-
-        .select-items div {
-            padding: 8px 10px;
-            cursor: pointer;
-            border-bottom: 1px solid #7a4ea0;
-            font-size: 18px;
-        }
-
-        .select-items div:hover {
-            background-color: #6a3d9a;
-            color: white;
-        }
-
-        .distance-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #6a3d9a;
-            color: white;
-            border: 2px solid #7a4ea0;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-
-        .distance-placeholder {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #7a4ea0;
-        }
-
-        .distance-result {
-            padding: 20px;
-            border: 2px solid #4dff88;
-            background-color: #fff;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 768px) {
-            .container {
-                margin: 5px;
-            }
-
-            .input-group input {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .info-panels {
-                grid-template-columns: 1fr;
-            }
-        }
+/* ==================== IMPORTACIÓN DE FUENTE Y RESET ==================== */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    line-height: 1.6;
+    background-color: #e6f0f7;
+    color: #2c3e50;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    border: none; /* Quitamos el borde sólido grueso */
+    border-radius: 25px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    padding: 30px;
+}
+
+/* ==================== ENCABEZADOS ==================== */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header img {
+    max-width: 220px;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+h1 {
+    font-size: 42px; /* Ajustado para la fuente pixelada */
+    margin-bottom: 15px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #34495e;
+    /* ESTILO ACT 14: Subrayado sutil azul */
+    border-bottom: 2px solid #b3d4fc;
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #34495e;
+}
+
+p {
+    font-size: 22px;
+    margin: 10px 0;
+    text-align: center;
+    color: #2c3e50;
+}
+
+/* ==================== CONTROLES Y FORMULARIOS ==================== */
+.controls {
+    border: 1px solid #aed6f1;
+    border-radius: 25px;
+    padding: 25px;
+    margin-bottom: 30px;
+    background: #eaf6ff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: center; /* Centramos los inputs */
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-size: 24px;
+}
+
+.input-group input {
+    width: 300px;
+    padding: 12px;
+    border: 1px solid #aed6f1;
+    border-radius: 20px;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    color: #2c3e50;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #5dade2;
+    box-shadow: 0 0 5px rgba(93, 173, 226, 0.5);
+}
+
+/* ==================== BOTONES ==================== */
+button {
+    /* ESTILO ACT 14: Botones oscuros, redondeados, hover azul claro */
+    padding: 12px 25px;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    font-weight: normal; /* La fuente ya es gruesa */
+    border: none;
+    border-radius: 20px;
+    background-color: #34495e;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #5dade2;
+}
+
+/* ==================== NÚMEROS PREDEFINIDOS ==================== */
+.preset-section {
+    margin-top: 30px;
+    border-top: 1px solid #b3d4fc; /* Separador sutil */
+    padding-top: 20px;
+}
+
+.preset-section h3 {
+    text-align: left;
+}
+
+.preset-section p {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.preset-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.preset-btn {
+    /* Adaptamos los botones de preset al estilo Act 14 pero más claros */
+    padding: 8px 15px;
+    border: 1px solid #aed6f1;
+    border-radius: 15px;
+    background-color: #fff;
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: #34495e;
+    transition: all 0.2s;
+}
+
+.preset-btn:hover {
+    background-color: #5dade2;
+    color: white;
+    border-color: #5dade2;
+}
+
+/* ==================== RECTA NUMÉRICA ==================== */
+.number-line-container {
+    /* Estilo contenedor tipo "Result Box" de Act 14 */
+    border: 1px solid #aed6f1;
+    border-radius: 25px;
+    padding: 30px;
+    margin-bottom: 30px;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.number-line-container h2 {
+    text-align: center;
+    border-bottom: none; /* Quitamos el borde aquí para limpieza visual */
+}
+
+.number-line {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    background-color: #eaf6ff; /* Fondo sutil para el área de dibujo */
+    border: 1px solid #aed6f1;
+    border-radius: 15px;
+    margin: 20px 0;
+}
+
+.range-info {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.range-info small {
+    color: #7f8c8d;
+    font-size: 20px;
+}
+
+/* ==================== ELEMENTOS DE LA RECTA ==================== */
+.line {
+    position: absolute;
+    top: 58px;
+    left: 5%;
+    right: 5%;
+    height: 4px;
+    background-color: #2c3e50; /* Color oscuro base */
+    border-radius: 2px;
+}
+
+.tick {
+    position: absolute;
+    width: 2px;
+    height: 24px;
+    background-color: #2c3e50;
+    top: 48px;
+}
+
+.tick-label {
+    position: absolute;
+    top: 80px;
+    font-size: 20px;
+    font-family: 'VT323', monospace;
+    font-weight: bold;
+    color: #2c3e50;
+    transform: translateX(-50%);
+}
+
+/* ==================== PUNTOS EN LA RECTA ==================== */
+.number-point {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 51px;
+    transform: translateX(-50%);
+    border: 2px solid #2c3e50; /* Borde oscuro para contraste */
+    border-radius: 50%; /* Mantenemos círculos aunque sea pixel art */
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s;
+}
+
+.number-point:hover {
+    transform: translateX(-50%) scale(1.3);
+}
+
+/* Colores semánticos (se mantienen pero ajustados para que no choquen) */
+.number-point.naturals { background-color: #e74c3c; } /* Rojo */
+.number-point.integers { background-color: #3498db; } /* Azul fuerte */
+.number-point.rationals { background-color: #2ecc71; } /* Verde */
+.number-point.irrationals { background-color: #f1c40f; } /* Amarillo */
+
+.point-label {
+    position: absolute;
+    top: -35px;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #aed6f1;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 18px;
+    font-family: 'VT323', monospace;
+    color: #2c3e50;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 20;
+}
+
+/* =================== PANELES DE INFORMACIÓN =================== */
+.info-panels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.classification-panel,
+.points-panel,
+.distance-calculator {
+    /* Estilo "Card" con bordes redondeados */
+    border: 1px solid #aed6f1;
+    border-radius: 20px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.classification-panel h3,
+.points-panel h3,
+.distance-calculator h3 {
+    border-bottom: 2px solid #b3d4fc;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* ================== LEYENDA DE CLASIFICACIÓN ================== */
+.classification-legend {
+    margin-bottom: 20px;
+    background-color: #eaf6ff;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+.legend-color {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #2c3e50;
+    border-radius: 4px;
+}
+
+/* Mismos colores que los puntos */
+.legend-color.naturals { background-color: #e74c3c; }
+.legend-color.integers { background-color: #3498db; }
+.legend-color.rationals { background-color: #2ecc71; }
+.legend-color.irrationals { background-color: #f1c40f; }
+
+.classification-info h4 {
+    font-size: 24px;
+    margin: 15px 0 10px 0;
+    color: #34495e;
+}
+
+.classification-info ul {
+    margin-left: 20px;
+    list-style-type: square; /* Estilo retro */
+}
+
+.classification-info li {
+    margin: 5px 0;
+    font-size: 20px;
+    color: #2c3e50;
+}
+
+/* ==================== LISTA DE PUNTOS ==================== */
+.points-list {
+    min-height: 200px;
+}
+
+.empty-state p {
+    font-size: 20px;
+    color: #7f8c8d;
+}
+
+.point-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin: 8px 0;
+    /* Estilo de item redondeado */
+    background-color: #eaf6ff;
+    border: 1px solid #aed6f1;
+    border-radius: 12px;
+    font-size: 20px;
+}
+
+/* ================== CALCULADORA DE DISTANCIAS ================== */
+.calculator-description {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.distance-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-size: 22px;
+}
+
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.select-selected {
+    padding: 10px 15px;
+    border: 1px solid #aed6f1;
+    border-radius: 15px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: 'VT323', monospace;
+    color: #2c3e50;
+}
+
+.select-selected:after {
+    content: "▼";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+
+.select-items {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #aed6f1;
+    border-radius: 15px;
+    z-index: 100;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.select-items.show {
+    display: block;
+}
+
+.select-items div {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #e6f0f7;
+    font-size: 20px;
+}
+
+.select-items div:hover {
+    background-color: #eaf6ff;
+    color: #34495e;
+}
+
+.distance-btn {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    /* Usa estilos base de button */
+}
+
+.distance-placeholder {
+    text-align: center;
+    padding: 20px;
+    border: 2px dashed #aed6f1;
+    border-radius: 15px;
+    color: #7f8c8d;
+    font-size: 20px;
+}
+
+.distance-result {
+    padding: 20px;
+    /* Estilo Result Box de Act 14 */
+    border: 1px solid #aed6f1;
+    border-radius: 20px;
+    background-color: #eaf6ff;
+    color: #2c3e50;
+    font-size: 22px;
+    text-align: center;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 5px;
+        border-radius: 15px;
+    }
+
+    .input-group input {
+        width: 100%;
+    }
+
+    .info-panels {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 { font-size: 32px; }
+    h2 { font-size: 26px; }
+}
     </style>
 </head>
 

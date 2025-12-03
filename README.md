@@ -1,6 +1,6 @@
-# 📘 Portafolio de Evidencias - Desarrollo de Aplicaciones Web
+#  Portafolio de Evidencias - Desarrollo de Aplicaciones Web
 
-## 👨‍💻 Información del Estudiante
+## Información del Estudiante
 
 - **Nombre:** Venus Getsemaní Semino Alemán
 - **Matrícula:** SW2509027
@@ -64,3 +64,4 @@ Durante el desarrollo de este portafolio logré:
 Este proyecto es parte de las actividades académicas universitarias y está desarrollado con fines educativos.
 
 Hecho con 💜 por **Venus Getsemaní Semino Alemán** - 2025
+

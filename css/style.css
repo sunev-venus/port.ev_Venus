@@ -1,0 +1,178 @@
+/* ==================== IMPORTACIÓN DE FUENTE ==================== */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* ==================== RESET Y BASE ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Fondo azul pastel y fuente pixelada */
+    font-family: 'VT323', monospace;
+    background-color: #e6f0f7;
+    color: #2c3e50;
+    line-height: 1.6;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ==================== HEADER ==================== */
+.main-header {
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.main-header h1 {
+    font-size: 4rem; /* Tamaño grande para título pixelado */
+    color: #34495e;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0px #aed6f1; /* Sombra sólida estilo retro */
+}
+
+.main-header p {
+    font-size: 1.5rem;
+    color: #5dade2;
+    background: #ffffff;
+    display: inline-block;
+    padding: 5px 20px;
+    border-radius: 15px;
+    border: 1px solid #aed6f1;
+}
+
+/* ==================== CONTENEDOR PRINCIPAL ==================== */
+.container {
+    max-width: 1000px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 30px;
+    /* Sombra profunda y suave */
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    border: none;
+    margin-bottom: 40px;
+}
+
+.container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #34495e;
+    margin-bottom: 10px;
+    font-weight: normal;
+    border-bottom: 2px solid #b3d4fc;
+    padding-bottom: 10px;
+    display: block;
+}
+
+.container > p {
+    text-align: center;
+    font-size: 1.4rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+/* ==================== GRID DE ACTIVIDADES ==================== */
+
+
+.menu-actividades ul {
+    list-style: none;
+    display: grid;
+    /* Grid responsivo: crea columnas automáticas de mínimo 220px */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 0;
+}
+
+.menu-actividades li {
+    display: flex;
+}
+
+/* ==================== TARJETAS (LINKS) ==================== */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 25px;
+    text-decoration: none;
+    background-color: #eaf6ff; /* Fondo azul muy claro */
+    border: 1px solid #aed6f1;
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-align: center;
+    height: 100%;
+}
+
+/* Título de la tarjeta (Actividad X) */
+.card h3 {
+    font-size: 1.8rem;
+    color: #34495e;
+    margin-bottom: 10px;
+    font-weight: normal;
+    transition: color 0.3s ease;
+}
+
+/* Descripción de la tarjeta */
+.card p {
+    font-size: 1.3rem;
+    color: #5dade2; /* Color de acento */
+    font-weight: normal;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+/* ==================== EFECTOS HOVER ==================== */
+.card:hover {
+    transform: translateY(-8px); /* Se eleva al pasar el mouse */
+    background-color: #34495e; /* Cambia a oscuro */
+    border-color: #34495e;
+    box-shadow: 0 10px 20px rgba(52, 73, 94, 0.3);
+}
+
+.card:hover h3 {
+    color: #ffffff; /* Texto blanco */
+}
+
+.card:hover p {
+    color: #aed6f1; /* Texto azul claro */
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    margin-top: auto; /* Empuja el footer al fondo si hay poco contenido */
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 600px) {
+    .main-header h1 {
+        font-size: 3rem;
+    }
+    
+    .container {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .menu-actividades ul {
+        grid-template-columns: 1fr; /* Una columna en móviles */
+    }
+    
+    .card {
+        padding: 20px;
+    }
+}

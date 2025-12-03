@@ -230,6 +230,53 @@
         width: 100%;
         box-sizing: border-box;
     }
+
+    /* ==================== BOTÓN DE VOLVER (FLOTANTE - ESTILO ACT 14) ==================== */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+.boton-volver {
+    /* 1. POSICIÓN FIJA (FUNCIONALIDAD INTACTA): */
+    position: fixed; 
+    top: 20px;       
+    left: 20px;      
+    z-index: 9999;   
+
+    /* 2. ESTÉTICA (PIXEL ART / AZUL PASTEL): */
+    font-family: 'VT323', monospace; /* Fuente pixelada */
+    font-size: 24px;                 /* Tamaño ajustado para legibilidad pixel */
+    font-weight: normal;
+    text-decoration: none;
+    
+    background-color: #34495e;       /* Azul Oscuro (Primary) */
+    color: white;
+    
+    /* En Act 14 usamos bordes redondeados (20px-25px), no totalmente redondos (50px) */
+    border-radius: 25px;             
+    border: 1px solid #2c3e50;       /* Borde sutil oscuro */
+    
+    padding: 10px 25px;              /* Un poco más ancho */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Sombra suave */
+    
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+}
+
+.boton-volver:hover {
+    background-color: #5dade2;       /* Azul Claro (Accent) */
+    border-color: #5dade2;
+    transform: scale(1.1) rotate(-2deg); /* Pequeño efecto dinámico "juguetón" */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+}
+
+/* AJUSTE PARA MÓVILES */
+@media (max-width: 768px) {
+    .boton-volver {
+        padding: 8px 18px;
+        font-size: 20px; /* Ajuste para fuente pixelada en móvil */
+        top: 15px;
+        left: 15px;
+    }
+}
 </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
 </head>
@@ -263,6 +310,8 @@
             <div id="mensajeErrorFormula" class="error-message"></div>
         </section>
     </div>
+<script src="../../js/script_global.js"></script>
+
 <script src="script.js"></script>
 </body>
 </html>
